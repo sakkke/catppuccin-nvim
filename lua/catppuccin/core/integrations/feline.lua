@@ -77,7 +77,7 @@ local invi_sep = {
 	str = " ",
 	hl = {
 		fg = sett.bkg,
-		bg = sett.bkg
+		bg = 'NONE'
 	},
 }
 
@@ -112,7 +112,7 @@ components.active[1][1] = {
 	hl = function()
 		return {
 			fg = mode_colors[vim.fn.mode()][2],
-			bg = sett.bkg,
+			bg = 'NONE',
 		}
 	end,
 }
@@ -146,7 +146,7 @@ components.active[1][4] = {
 	hl = function()
 		return {
 			fg = mode_colors[vim.fn.mode()][2],
-			bg = sett.bkg
+			bg = 'NONE'
 		}
 	end,
 	enabled = function()
@@ -201,7 +201,7 @@ components.active[1][9] = {
 	provider = assets.right_semicircle,
 	hl = {
 		fg = sett.diffs,
-		bg = sett.bkg,
+		bg = 'NONE',
 	},
 	enabled = function()
 		return any_git_changes()
@@ -230,7 +230,7 @@ components.active[1][10] = {
 	-- end,
 	hl = {
 		fg = sett.extras,
-		bg = sett.bkg
+		bg = 'NONE'
 	},
 	left_sep = invi_sep,
 }
@@ -243,7 +243,7 @@ components.active[1][11] = {
 	-- end,
 	hl = {
 		fg = sett.extras,
-		bg = sett.bkg
+		bg = 'NONE'
 	},
 	left_sep = invi_sep,
 }
@@ -290,7 +290,7 @@ components.active[2][1] = {
 	end,
 	hl = {
 		fg = clrs.rosewater,
-		bg = sett.bkg
+		bg = 'NONE'
 	},
 }
 
@@ -303,7 +303,7 @@ components.active[2][2] = {
 
 	hl = {
 		fg = clrs.red,
-		bg = sett.bkg,
+		bg = 'NONE',
 	},
 	icon = "  ",
 }
@@ -315,7 +315,7 @@ components.active[2][3] = {
 	end,
 	hl = {
 		fg = clrs.yellow,
-		bg = sett.bkg,
+		bg = 'NONE',
 	},
 	icon = "  ",
 }
@@ -327,7 +327,7 @@ components.active[2][4] = {
 	end,
 	hl = {
 		fg = clrs.sky,
-		bg = sett.bkg,
+		bg = 'NONE',
 	},
 	icon = "  ",
 }
@@ -339,7 +339,7 @@ components.active[2][5] = {
 	end,
 	hl = {
 		fg = clrs.rosewater,
-		bg = sett.bkg,
+		bg = 'NONE',
 	},
 	icon = "  ",
 }
@@ -356,7 +356,7 @@ components.active[3][1] = {
 	end,
 	hl = {
 		fg = sett.extras,
-		bg = sett.bkg
+		bg = 'NONE'
 	},
 	icon = "   ",
 	left_sep = invi_sep,
@@ -373,7 +373,7 @@ components.active[3][2] = {
 	end,
 	hl = {
 		fg = sett.extras,
-		bg = sett.bkg
+		bg = 'NONE'
 	},
 	right_sep = invi_sep,
 }
@@ -400,7 +400,7 @@ components.active[3][3] = {
 		str = assets.left_semicircle,
 		hl = {
 			fg = sett.curr_file,
-			bg = sett.bkg,
+			bg = 'NONE',
 		},
 	},
 }
