@@ -23,7 +23,7 @@ local assets = {
 	slant_right_2 = "",
 	slant_right_2_thin = "",
 	chubby_dot = "●",
-	slim_dot = '•',
+	slim_dot = "•",
 }
 
 local clrs = require("catppuccin.core.color_palette")
@@ -62,6 +62,15 @@ local mode_colors = {
 
 local shortline = false
 
+local function is_enabled(is_shortline, winid, min_width)
+	if is_shortline then
+		return true
+	end
+
+	winid = winid or 0
+	return vim.api.nvim_win_get_width(winid) > min_width
+end
+
 -- Initialize the components table
 local components = {
 	active = {},
@@ -85,16 +94,18 @@ local invi_sep = {
 local function any_git_changes()
 	local gst = b.gitsigns_status_dict -- git stats
 	if gst then
-		if gst["added"] and gst["added"] > 0 or gst["removed"] and gst["removed"] > 0 or gst["changed"] and gst["changed"] > 0 then
+		if
+			gst["added"] and gst["added"] > 0
+			or gst["removed"] and gst["removed"] > 0
+			or gst["changed"] and gst["changed"] > 0
+		then
 			return true
 		end
 	end
 	return false
 end
 
-
 -- #################### STATUSLINE ->
-
 
 -- ######## Left
 
@@ -103,7 +114,7 @@ local vi_mode_hl = function()
 	return {
 		fg = sett.bkg,
 		bg = mode_colors[vim.fn.mode()][2],
-		style = "bold"
+		style = "bold",
 	}
 end
 
@@ -151,7 +162,7 @@ components.active[1][4] = {
 	end,
 	enabled = function()
 		return not any_git_changes()
-	end
+	end,
 }
 
 -- enable if git diffs are available
@@ -160,12 +171,12 @@ components.active[1][5] = {
 	hl = function()
 		return {
 			fg = mode_colors[vim.fn.mode()][2],
-			bg = sett.diffs
+			bg = sett.diffs,
 		}
 	end,
 	enabled = function()
 		return any_git_changes()
-	end
+	end,
 }
 -- Current vi mode ------>
 
@@ -205,7 +216,7 @@ components.active[1][9] = {
 	},
 	enabled = function()
 		return any_git_changes()
-	end
+	end,
 }
 -- Diffs ------>
 
@@ -285,9 +296,7 @@ components.active[2][1] = {
 
 		return ""
 	end,
-	enabled = shortline or function(winid)
-		return vim.api.nvim_win_get_width(winid) > 80
-	end,
+	enabled = is_enabled(shortline, winid, 80),
 	hl = {
 		fg = clrs.rosewater,
 		bg = 'NONE'
@@ -351,9 +360,7 @@ components.active[2][5] = {
 
 components.active[3][1] = {
 	provider = "git_branch",
-	enabled = shortline or function(winid)
-		return vim.api.nvim_win_get_width(winid) > 70
-	end,
+	enabled = is_enabled(shortline, winid, 70),
 	hl = {
 		fg = sett.extras,
 		bg = 'NONE'
@@ -389,9 +396,7 @@ components.active[3][3] = {
 		end
 		return " " .. icon .. " " .. filename .. " "
 	end,
-	enabled = shortline or function(winid)
-		return vim.api.nvim_win_get_width(winid) > 70
-	end,
+	enabled = is_enabled(shortline, winid, 70),
 	hl = {
 		fg = sett.bkg,
 		bg = sett.curr_file,
@@ -411,9 +416,7 @@ components.active[3][4] = {
 		return "  " .. dir_name .. " "
 	end,
 
-	enabled = shortline or function(winid)
-		return vim.api.nvim_win_get_width(winid) > 80
-	end,
+	enabled = is_enabled(shortline, winid, 80),
 
 	hl = {
 		fg = sett.bkg,
